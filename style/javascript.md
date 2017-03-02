@@ -1,7 +1,7 @@
 # JavaScript Style Guide
 
-## Table of Contents
-----
+### Table of Contents
+
 * [Naming Conventions](#naming-conventions)
   * [Files](#files)
   * [Namespacing](#namespacing)
@@ -273,9 +273,8 @@ Acronyms and initialisms should always be all capitalized, or all lowercased.
 
 **[⬆ back to top](#table-of-contents)**
 
-##
 
-**[⬆ back to top](#table-of-contents)****[⬆ back to t**[⬆ back to top](#table-of-contents)**op](#table-of-contents)**Syntax
+##Syntax
 
 ### Whitespace
 
@@ -629,7 +628,8 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 ```
 
 
-**[⬆ back to top](#table-of-contents)****[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
+
 
 ### Semicolons
 
@@ -658,6 +658,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
 **[⬆ back to top](#table-of-contents)**
+
 
 ### Braces
 
@@ -690,9 +691,8 @@ if (true)
 ```
 **[⬆ back to top](#table-of-contents)**
 
-**[⬆ back to top](#table-of-contents)**
 
-## Require and Import
+### Require and Import
 
 Import or `require()` base library code first.
 
