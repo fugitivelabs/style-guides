@@ -22,12 +22,6 @@
   * [Array and Object literals](#array-and-object-literals)
   * [Avoid href="#" for JavaScript triggers](#avoid-href-for-javascript-triggers)
 * [ES6/7 rules](#es67-rules)
-  * [Use =&gt; instead of bind(this)](#use--instead-of-bindthis)
-  * [Use backticks for string interpolation](#use-backticks-for-string-interpolation)
-  * [Use ES6 classes for React classes](#use-es6-classes-for-react-classes)
-  * [Do not use async/await or generators](#do-not-use-asyncawait-or-generators)
-  * [Do not use Set or Map](#do-not-use-set-or-map)
-  * [Use let and const for new files; do not use var](#use-let-and-const-for-new-files-do-not-use-var)
 
 
 ----
