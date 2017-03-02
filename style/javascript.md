@@ -1,5 +1,6 @@
-## JavaScript Style Guide
+# JavaScript Style Guide
 
+## Table of Contents
 ----
 * [Naming Conventions](#naming-conventions)
   * [Files](#files)
