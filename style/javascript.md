@@ -1,11 +1,10 @@
 ## JavaScript Style Guide
 
 ----
-
-* [Syntax](#syntax)
-  * [Naming](#naming)
+* [Naming Conventions](#naming)
   * [Naming private methods and properties](#naming-private-methods-and-properties)
   * [File names](#file-names)
+* [Syntax](#syntax)
   * [Indentation](#indentation)
   * [Braces](#braces)
   * [Spaces](#spaces)
@@ -32,698 +31,247 @@
 
 ----
 
-This guide is adapted from the Khan Academy style guide.
+This guide is adapted from the Khan Academy and AirBng style guides.
 
 ----------
-### Syntax
 
-#### File names
+## Naming Conventions
+
+#### Files
 
 ```
 genericFileNamesLikeThis.js
 ModelNamesLikeThis.js
 JsxFileNamesLikeThis.js.jsx // show the extension
 ```
+Filenames should be verbose enough to determine what you're looking at by glancing at the top of your editor.
 
-#### Braces
-
-Braces should always be used on blocks.
-
-`if/else/for/while/try` should always have braces and always go on
-multiple lines, with the opening brace on the same line.
-
-Yes:
-```js
-if (true) {
-    blah();
-}
-```
-
-`else/else if/catch` should go on the same line as the brace:
+  > Why? When working in SublimeText or Atom or most any other editor, it's a terrible experience to have mulitple files open all named `controller.js`
 
 ```js
-if (blah) {
-    baz();
-} else {
-    baz2();
-}
-```
-
-No:
-```js
-if (true)
-    blah();
-```
-
-#### `require()` & `import` lines.
-
-Import or `require()` base library code first.
-
-Separate first party and third party `require()` lines, and sort
-`require()` lines.
-
-"First party" code is anything we wrote whose primary source lives in
-the repository its being used in.  Lodash is third party because
-we didn't write it.  
-
-Imports should be sorted lexicographically (as per unix `sort`).
-
-Yes:
-```js
-// import base library
-var React = require("react");
-
-var $ = require("jquery");
-var _ = require("lodash");
-
-var APIActionResults = require("../shared-package/api-action-results.js");
-var Cookies = require("../shared-package/cookies.js");
-var DashboardActions = require('./datastores/dashboard-actions.js');
-var HappySurvey = require("../missions-package/happy-survey.jsx");
-var UserMission = require("../missions-package/user-mission.js");
-var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
-```
-
-No:
-```js
-var $ = require("jquery");
-var APIActionResults = require("../shared-package/api-action-results.js");
-var Cookies = require("../shared-package/cookies.js");
-var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
-var _ = require("lodash");
-var HappySurvey = require("../missions-package/happy-survey.jsx");
-var DashboardActions = require('./datastores/dashboard-actions.js');
-var React = require("react");
-var UserMission = require("../missions-package/user-mission.js");
-var Kicksend = require("../../third_party/javascript-khansrc/mailcheck/mailcheck.js");
-```
-
-Object destructuring should go after all require lines.
-
-Write requires on a single line, even if they extend past 80 chars, so they are easier to sort.
-
-Yes:
-```js
-// import base library
-import React from 'react';
-
-// import third-party libraries
-import _ from 'lodash';
-
-// import
-import ProductList from './ProductList.js.jsx';
-import ProductListItem from './ProductListItem.js.jsx';
-
-// import
-import { TextInput, NumberInput } from '../global/components/forms';
-
-```
-
-No:
-```js
-import _ from 'lodash';
-import { TextInput, NumberInput } from '../global/components/forms';
-import React from 'react';
-import ProductList from './ProductList.js.jsx';
-
-```
-
-
-------------------------------
-### Comments and documentation
-
-Use `/** ... */` for multi-line comments.
-
-```javascript
-  // bad
-  // make() returns a new element
-  // based on the passed in tag name
-  //
-  // @param {String} tag
-  // @return {Element} element
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-
-  // good
-  /**
-   * make() returns a new element
-   * based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-```
-
-Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
-
-```javascript
-  // bad
-  const active = true;  // is current tab
-
-  // good
-  // is current tab
-  const active = true;
-
-  // bad
-  function getType() {
-    console.log('fetching type...');
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-
-  // good
-  function getType() {
-    console.log('fetching type...');
-
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-
-  // also good
-  function getType() {
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-```
-
-Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
-
-```javascript
-  // bad
-  //is current tab
-  const active = true;
-
-  // good
-  // is current tab
-  const active = true;
-
-  // bad
-  /**
-   *make() returns a new element
-   *based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-
-  // good
-  /**
-   * make() returns a new element
-   * based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-```
-
-Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
-
-Use `// FIXME:` to annotate problems.
-
-```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
-
-      // FIXME: shouldn't use a global here
-      total = 0;
-    }
-  }
-```
-
-Use `// TODO:` to annotate solutions to problems.
-
-```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
-
-      // TODO: total should be configurable by an options param
-      this.total = 0;
-    }
-  }
-```
-
-
-
-#### Methods and properties comments
-
-All non-trivial methods and properties should also have JSDoc comments.
-
-Type annotations are strongly encouraged; if there is even a slight
-chance that the type will be ambiguous to future readers, put in a
-type annotation.
-
-Type annotations are based on the ES4/JS2 type system, and are
-documented in the [Google JavaScript style
-guide](https://google.github.io/styleguide/javascriptguide.xml).
-
-`@param` and `@return` type annotations that have comments that do not
-fit on one line wrap to the next line and indent 2 spaces.
-
-Example:
-
-```js
-/**
- * A UI component allows users to select from a list of exercises within
- * a table.
- * Expects an array of exercise IDs as a prop.
- */
-
-class ExerciseList extends Base {
-  constructor(props) {
-    super(props);
-    /**
-     * Check if the exercise list is available at render,
-     * otherwise, set the state to an empty array
-     */
-    this.state = {
-      exercises: props.exercises || []
-    }
-    this._bind(
-      '_showExercise'
-    )
-  }
-
-  /**
-   * Determines which exercise to display
-   * @param {string=} id the database ID of the exercise
-   */
-  _showExercise(id) {
-    ...
-  }
-  ...
-}
-```
-
------------------------
-
-### Core language rules
-
-#### References
-Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
-
-> Why? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code.
-
-```javascript
 // bad
-var a = 1;
-var b = 2;
+resources/
+  |_ products/
+      |_ controller.js
+      |_ model.js
+      |_ api.js
 
-// good
-const a = 1;
-const b = 2;
+// better, but still bad
+resources/
+  |_ products/
+      |_ products.js
+      |_ Product.js
+      |_ api.js
+
+// best
+resources/
+  |_ products/
+      |_ productsController.js
+      |_ ProductModel.js
+      |_ productApi.js
+
+
 ```
 
-If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
 
-> Why? `let` is block-scoped rather than function-scoped like `var`.
+#### Namespaceing
 
-```javascript
-// bad
-var count = 1;
-if (true) {
-  count += 1;
-}
-
-// good, use the let.
-let count = 1;
-if (true) {
-  count += 1;
-}
-```
-
-Note that both `let` and `const` are block-scoped.
-
-```javascript
-// const and let only exist in the blocks they are defined in.
-{
-  let a = 1;
-  const b = 1;
-}
-console.log(a); // ReferenceError
-console.log(b); // ReferenceError
-```
-
-If you must use `var` create new statement for each declaration.
-Yes:
-```js
-var a = "foo";
-var b = a + "bar";
-var c = fn(a, b);
-```
-
-No:
-```js
-var a = "foo",
-b = a + "bar",
-c = fn(a, b);
-```
-
-A single var statement is bad because:
-
-* If you forget a comma, you just made a global
-* It originated when people wanted to save bytes, but we have a minifier
-* It makes line-based diffs/editing messier
-* It encourages C89-style declarations at the top of scope, preventing
-you from only declaring vars before first use, the latter preferable
-as it conveys intended scope to the reader
-
-
-#### Strings
-
-
-Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
-
-```javascript
-// bad
-const name = "Capt. Janeway";
-
-// bad - template literals should contain interpolation or newlines
-const name = `Capt. Janeway`;
-
-// good
-const name = 'Capt. Janeway';
-```
-
-Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
-
-    > Why? Broken strings are painful to work with and make code less searchable.
-
-```javascript
-   // bad
-   const errorMessage = 'This is a super long error that was thrown because \
-   of Batman. When you stop to think about how Batman had anything to do \
-   with this, you would get nowhere \
-   fast.';
-
-   // bad
-   const errorMessage = 'This is a super long error that was thrown because ' +
-     'of Batman. When you stop to think about how Batman had anything to do ' +
-     'with this, you would get nowhere fast.';
-
-   // good
-   const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-   ```
-
-When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](http://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing) jscs: [`requireTemplateStrings`](http://jscs.info/rule/requireTemplateStrings)
-
-   > Why? Template strings give you a readable, concise syntax with proper newlines and string interpolation features.
+Avoid single letter names. Be descriptive with your naming. eslint: [`id-length`](http://eslint.org/docs/rules/id-length)
 
 ```javascript
   // bad
-  function sayHi(name) {
-    return ['How are you, ', name, '?'].join();
-  }
-
-  // bad
-  function sayHi(name) {
-    return `How are you, ${ name }?`;
+  function q() {
+    // ...
   }
 
   // good
-  function sayHi(name) {
-    return `How are you, ${name}?`;
+  function query() {
+    // ...
   }
 ```
 
-Never use `eval()` on a string, it opens too many vulnerabilities.
-
-Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](http://eslint.org/docs/rules/no-useless-escape)
-
-> Why? Backslashes harm readability, thus they should only be present when necessary.
+Use camelCase when naming objects, functions, and instances. eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
 
 ```javascript
-// bad
-const foo = '\'this\' \i\s \"quoted\"';
+  // bad
+  const OBJEcttsssss = {};
+  const this_is_my_object = {};
+  function c() {}
 
-// good
-const foo = '\'this\' is "quoted"';
-const foo = `my name is '${name}'`;
+  // good
+  const thisIsMyObject = {};
+  function thisIsMyFunction() {}
+```
+
+Use PascalCase only when naming constructors or classes. eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
+
+```javascript
+  // bad
+  function user(options) {
+    this.name = options.name;
+  }
+
+  const bad = new user({
+    name: 'nope',
+  });
+
+  // good
+  class User {
+    constructor(options) {
+      this.name = options.name;
+    }
+  }
+
+  const good = new User({
+    name: 'yup',
+  });
 ```
 
 
 
-#### Comparison Operators & Equality
 
-Prefer `===` (strict equality) to `==` due to the [numerous oddities
-related to JavaScript's type coercion](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/).
+Private methods and properties (in files, classes, and namespaces)
+should be named with a leading underscore.
 
-The only valid use of `==` is for comparing against null and undefined
-at the same time:
+While we do not currently use any compilers to enforce this, clients
+of an API or class are expected to respect these conventions.
 
 ```js
-// Check null and undefined, but distinguish between other falsey values
-if (someVariable == null) {
-  ...
+function _PrivateClass() {
+    // should not be instantiated outside of this file
 }
+
+function PublicClass(param) {
+    this.publicMember = param;
+    this._privateMember = new _PrivateClass();
+}
+
+var x = new _PrivateClass();  // OK - we’re in the same file.
+var y = new PublicClass();    // OK
+var z = y._privateMember;     // NOT OK!
 ```
 
-Though you will often want to just check against falsey values, and
-can just say `if (!someVariable) {...}`.
+Rationale: leading underscores for private methods and properties is
+consistent with the styles used in numerous JavaScript libraries, many
+of which we include in our code base.
 
 
-Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
-
-  + **Objects** evaluate to **true**
-  + **Undefined** evaluates to **false**
-  + **Null** evaluates to **false**
-  + **Booleans** evaluate to **the value of the boolean**
-  + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-  + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
-
-```javascript
-  if ([0] && []) {
-    // true
-    // an array (even an empty one) is an object, objects will evaluate to true
-  }
-```
-
-Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+Don't save references to `this`. Use arrow functions or [Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind). jscs: [`disallowNodeTypes`](http://jscs.info/rule/disallowNodeTypes)
 
 ```javascript
   // bad
-  if (isValid === true) {
-    // ...
-  }
-
-  // good
-  if (isValid) {
-    // ...
-  }
-
-  // bad
-  if (name) {
-    // ...
-  }
-
-  // good
-  if (name !== '') {
-    // ...
+  function foo() {
+    const self = this;
+    return function () {
+      console.log(self);
+    };
   }
 
   // bad
-  if (collection.length) {
-    // ...
+  function foo() {
+    const that = this;
+    return function () {
+      console.log(that);
+    };
   }
 
   // good
-  if (collection.length > 0) {
-    // ...
+  function foo() {
+    return () => {
+      console.log(this);
+    };
   }
 ```
 
-For more information see [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
-
-Use braces to create blocks in `case` and `default` clauses that contain lexical declarations (e.g. `let`, `const`, `function`, and `class`).
-
-  > Why? Lexical declarations are visible in the entire `switch` block but only get initialized when assigned, which only happens when its `case` is reached. This causes problems when multiple `case` clauses attempt to define the same thing.
-
-  eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
+A base filename should exactly match the name of its default export.
 
 ```javascript
-  // bad
-  switch (foo) {
-    case 1:
-      let x = 1;
-      break;
-    case 2:
-      const y = 2;
-      break;
-    case 3:
-      function f() {
-        // ...
-      }
-      break;
-    default:
-      class C {}
+  // file 1 contents
+  class CheckBox {
+    // ...
   }
+  export default CheckBox;
+
+  // file 2 contents
+  export default function fortyTwo() { return 42; }
+
+  // file 3 contents
+  export default function insideDirectory() {}
+
+  // in some other file
+  // bad
+  import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
+  import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
+  import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
+
+  // bad
+  import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
+  import forty_two from './forty_two'; // snake_case import/filename, camelCase export
+  import inside_directory from './inside_directory'; // snake_case import, camelCase export
+  import index from './inside_directory/index'; // requiring the index file explicitly
+  import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
 
   // good
-  switch (foo) {
-    case 1: {
-      let x = 1;
-      break;
-    }
-    case 2: {
-      const y = 2;
-      break;
-    }
-    case 3: {
-      function f() {
-        // ...
-      }
-      break;
-    }
-    case 4:
-      bar();
-      break;
-    default: {
-      class C {}
-    }
-  }
+  import CheckBox from './CheckBox'; // PascalCase export/import/filename
+  import fortyTwo from './fortyTwo'; // camelCase export/import/filename
+  import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
+  // ^ supports both insideDirectory.js and insideDirectory/index.js
 ```
 
-Ternaries should not be nested and generally be single line expressions. eslint rules: [`no-nested-ternary`](http://eslint.org/docs/rules/no-nested-ternary.html).
+Use camelCase when you export-default a function. Your filename should be identical to your function's name.
+
+```javascript
+  function makeStyleGuide() {
+    // ...
+  }
+
+  export default makeStyleGuide;
+```
+
+Use PascalCase when you export a constructor / class / singleton / function library / bare object.
+
+```javascript
+  const FugitiveLabsStyleGuide = {
+    es6: {
+    },
+  };
+
+  export default FugitiveLabsStyleGuide;
+```
+
+Acronyms and initialisms should always be all capitalized, or all lowercased.
+
+  > Why? Names are for readability, not to appease a computer algorithm.
 
 ```javascript
   // bad
-  const foo = maybe1 > maybe2
-    ? "bar"
-    : value1 > value2 ? "baz" : null;
+  import SmsContainer from './containers/SmsContainer';
 
-  // better
-  const maybeNull = value1 > value2 ? 'baz' : null;
+  // bad
+  const HttpRequests = [
+    // ...
+  ];
 
-  const foo = maybe1 > maybe2
-    ? 'bar'
-    : maybeNull;
+  // good
+  import SMSContainer from './containers/SMSContainer';
+
+  // good
+  const HTTPRequests = [
+    // ...
+  ];
 
   // best
-  const maybeNull = value1 > value2 ? 'baz' : null;
+  import TextMessageContainer from './containers/TextMessageContainer';
 
-  const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
+  // best
+  const Requests = [
+    // ...
+  ];
 ```
 
-Avoid unneeded ternary statements. eslint rules: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary.html).
+## Syntax
 
-```javascript
-  // bad
-  const foo = a ? a : b;
-  const bar = c ? true : false;
-  const baz = c ? false : true;
-
-  // good
-  const foo = a || b;
-  const bar = !!c;
-  const baz = !c;
-```
-
-#### Array and Object literals
-
-Always use `[]` and `{}` style literals to initialize arrays and
-objects, not the `Array` and `Object` constructors.
-
-Array constructors are error-prone due to their arguments: `new
-Array(3)` yields `[undefined, undefined, undefined]`, not `[3]`.
-
-To avoid these kinds of weird cases, always use the more readable
-array literal.
-
-Object constructors don't have the same problems, but follow the same
-rule for consistency with arrays.  Plus, `{}` is more readable.
-
-
-
-#### Avoid `href="#"` for JavaScript triggers
-
-When you want a link-like thing rather than a button to trigger a
-JavaScript operation, rather than going to a new address.
-
-Here's a discussion on Stack Overflow about options:
-http://stackoverflow.com/questions/134845/href-tag-for-javascript-links-or-javascriptvoid0
-
-
-Yes:
-```js
-<a href="javascript:void 0">Flag</a>
-```
-
-No:
-```js
-<a href="#">Flag</a>
-```
-
----------------
-### ES6/7 rules
-
-Several of our supported browsers support only ES5 natively.  We use
-polyfills to emulate [some -- but not all -- ES6 and ES7 language
-features](https://docs.google.com/spreadsheets/d/12mF99oCpERzLKS07wPPV3GiISUa8bPkKveuHsESDYHU/edit#gid=0)
-so they run on ES5-capable browsers.
-
-In some cases, we do not yet allow a new language feature, if it's
-expensive to polyfill.  In others, we require using the newer language
-feature and avoiding the old:
-
-| Construct | Use...                                | ...instead of |
-| --------- | ------------------------------------- | ---------------------- |
-| backticks | `` `http://${host}/${path}` `` | `"http://" + host + "/" + path` |
-| destructuring | `var {x, y} = a;` | `var x = a.x; var y = a.y;` |
-| fat arrow | `foo(() => {...})` | `foo(function() {...}.bind(this))` |
-| let/const | `let a = 1; const b = "4EVAH"; a++;` | `var a = 1; var b = "4EVAH"; a++;` |
-| includes | `array.includes(item)` | `array.indexOf(item) !== -1` |
-| for/of | `for (const [key, value] of Object.entries(obj)) {...}` | `_.each(obj, function(value, key) {...})` |
-| spread | `{...a, ...b, c: d}` | `_.extend({}, a, b, {c: d})` |
-| rest params | `function(bar, ...args) {foo(...args);}` | `function(bar) {var args = Array.prototype.slice.call(arguments, 1); foo.apply(null, args);}` |
-
-#### Use `=>` instead of `bind(this)`
-
-Arrow functions are easier to read (and with Babel, more efficient)
-than calling `bind` manually.
-
-#### Use rest params instead of `arguments`
-
-The magic `arguments` variable has some odd quirks. It's simpler to
-use rest params like `(...args) => foo(args)`.
-
-#### Use backticks for string interpolation
-
-`+` is not forbidden, but backticks are encouraged!
-
-#### Use ES6 classes for React classes
-
-See [React Use ES6 classes](react.md#use-es6-classes) for details.
-
-For classes outside of React -- which should actually be pretty rare -- you
-should also use ES6 classes.  Some things to keep in mind when using ES6
-classes:
-
-- Use `static` properties instead of adding properties to the class object
-  after defining the class.
-- Use `extend` syntax for inheritance.
-
-
-## Whitespace
+#### Whitespace
 
 **Always** use soft tabs (space character) set to 2 spaces. eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
 
@@ -1102,207 +650,691 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
 
-#### Naming Conventions
 
-Avoid single letter names. Be descriptive with your naming. eslint: [`id-length`](http://eslint.org/docs/rules/id-length)
+#### Braces
 
+Braces should always be used on blocks.
+
+`if/else/for/while/try` should always have braces and always go on
+multiple lines, with the opening brace on the same line.
+
+Yes:
+```js
+if (true) {
+    blah();
+}
+```
+
+`else/else if/catch` should go on the same line as the brace:
 
 ```js
-  ClassNamesLikeThis
-  methodNamesLikeThis
-  variableNamesLikeThis
-  parameterNamesLikeThis
-  propertyNamesLikeThis
-  SYMBOLIC_CONSTANTS_LIKE_THIS
+if (blah) {
+    baz();
+} else {
+    baz2();
+}
 ```
+
+No:
+```js
+if (true)
+    blah();
+```
+
+#### `require()` & `import` lines.
+
+Import or `require()` base library code first.
+
+Separate first party and third party `require()` lines, and sort
+`require()` lines.
+
+"First party" code is anything we wrote whose primary source lives in
+the repository its being used in.  Lodash is third party because
+we didn't write it.  
+
+Imports should be sorted lexicographically (as per unix `sort`).
+
+Yes:
+```js
+// import base library
+var React = require("react");
+
+var $ = require("jquery");
+var _ = require("lodash");
+
+var APIActionResults = require("../shared-package/api-action-results.js");
+var Cookies = require("../shared-package/cookies.js");
+var DashboardActions = require('./datastores/dashboard-actions.js');
+var HappySurvey = require("../missions-package/happy-survey.jsx");
+var UserMission = require("../missions-package/user-mission.js");
+var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
+```
+
+No:
+```js
+var $ = require("jquery");
+var APIActionResults = require("../shared-package/api-action-results.js");
+var Cookies = require("../shared-package/cookies.js");
+var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
+var _ = require("lodash");
+var HappySurvey = require("../missions-package/happy-survey.jsx");
+var DashboardActions = require('./datastores/dashboard-actions.js');
+var React = require("react");
+var UserMission = require("../missions-package/user-mission.js");
+var Kicksend = require("../../third_party/javascript-khansrc/mailcheck/mailcheck.js");
+```
+
+Object destructuring should go after all require lines.
+
+Write requires on a single line, even if they extend past 80 chars, so they are easier to sort.
+
+Yes:
+```js
+// import base library
+import React from 'react';
+
+// import third-party libraries
+import _ from 'lodash';
+
+// import
+import ProductList from './ProductList.js.jsx';
+import ProductListItem from './ProductListItem.js.jsx';
+
+// import
+import { TextInput, NumberInput } from '../global/components/forms';
+
+```
+
+No:
+```js
+import _ from 'lodash';
+import { TextInput, NumberInput } from '../global/components/forms';
+import React from 'react';
+import ProductList from './ProductList.js.jsx';
+
+```
+
+
+------------------------------
+### Comments and documentation
+
+Use `/** ... */` for multi-line comments.
 
 ```javascript
   // bad
-  function q() {
+  // make() returns a new element
+  // based on the passed in tag name
+  //
+  // @param {String} tag
+  // @return {Element} element
+  function make(tag) {
+
     // ...
+
+    return element;
   }
 
   // good
-  function query() {
+  /**
+   * make() returns a new element
+   * based on the passed-in tag name
+   */
+  function make(tag) {
+
     // ...
+
+    return element;
   }
 ```
 
-Use camelCase when naming objects, functions, and instances. eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase.html) jscs: [`requireCamelCaseOrUpperCaseIdentifiers`](http://jscs.info/rule/requireCamelCaseOrUpperCaseIdentifiers)
+Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
 
 ```javascript
   // bad
-  const OBJEcttsssss = {};
-  const this_is_my_object = {};
-  function c() {}
+  const active = true;  // is current tab
 
   // good
-  const thisIsMyObject = {};
-  function thisIsMyFunction() {}
-```
+  // is current tab
+  const active = true;
 
-Use PascalCase only when naming constructors or classes. eslint: [`new-cap`](http://eslint.org/docs/rules/new-cap.html) jscs: [`requireCapitalizedConstructors`](http://jscs.info/rule/requireCapitalizedConstructors)
-
-```javascript
   // bad
-  function user(options) {
-    this.name = options.name;
+  function getType() {
+    console.log('fetching type...');
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
   }
 
-  const bad = new user({
-    name: 'nope',
-  });
+  // good
+  function getType() {
+    console.log('fetching type...');
+
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+
+  // also good
+  function getType() {
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+```
+
+Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
+
+```javascript
+  // bad
+  //is current tab
+  const active = true;
 
   // good
-  class User {
-    constructor(options) {
-      this.name = options.name;
+  // is current tab
+  const active = true;
+
+  // bad
+  /**
+   *make() returns a new element
+   *based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+
+  // good
+  /**
+   * make() returns a new element
+   * based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+```
+
+Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
+
+Use `// FIXME:` to annotate problems.
+
+```javascript
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // FIXME: shouldn't use a global here
+      total = 0;
     }
   }
+```
 
-  const good = new User({
-    name: 'yup',
-  });
+Use `// TODO:` to annotate solutions to problems.
+
+```javascript
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // TODO: total should be configurable by an options param
+      this.total = 0;
+    }
+  }
 ```
 
 
 
+#### Methods and properties comments
 
-Private methods and properties (in files, classes, and namespaces)
-should be named with a leading underscore.
+All non-trivial methods and properties should also have JSDoc comments.
 
-While we do not currently use any compilers to enforce this, clients
-of an API or class are expected to respect these conventions.
+Type annotations are strongly encouraged; if there is even a slight
+chance that the type will be ambiguous to future readers, put in a
+type annotation.
+
+Type annotations are based on the ES4/JS2 type system, and are
+documented in the [Google JavaScript style
+guide](https://google.github.io/styleguide/javascriptguide.xml).
+
+`@param` and `@return` type annotations that have comments that do not
+fit on one line wrap to the next line and indent 2 spaces.
+
+Example:
 
 ```js
-function _PrivateClass() {
-    // should not be instantiated outside of this file
+/**
+ * A UI component allows users to select from a list of exercises within
+ * a table.
+ * Expects an array of exercise IDs as a prop.
+ */
+
+class ExerciseList extends Base {
+  constructor(props) {
+    super(props);
+    /**
+     * Check if the exercise list is available at render,
+     * otherwise, set the state to an empty array
+     */
+    this.state = {
+      exercises: props.exercises || []
+    }
+    this._bind(
+      '_showExercise'
+    )
+  }
+
+  /**
+   * Determines which exercise to display
+   * @param {string=} id the database ID of the exercise
+   */
+  _showExercise(id) {
+    ...
+  }
+  ...
 }
+```
 
-function PublicClass(param) {
-    this.publicMember = param;
-    this._privateMember = new _PrivateClass();
+#### Console logs
+
+Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in production deployment.
+
+  > Why? A few reasons.  
+    1. This causes memory leaks in the client (particularly in ReactNative).
+    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug.  
+    3. It's ugly
+
+Prefer verbose documentation in with comments.
+
+-----------------------
+
+## Core language rules
+
+#### References
+Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
+
+> Why? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code.
+
+```javascript
+  // bad
+  var a = 1;
+  var b = 2;
+
+  // good
+  const a = 1;
+  const b = 2;
+```
+
+If you must reassign references, use `let` instead of `var`. eslint: [`no-var`](http://eslint.org/docs/rules/no-var.html) jscs: [`disallowVar`](http://jscs.info/rule/disallowVar)
+
+> Why? `let` is block-scoped rather than function-scoped like `var`.
+
+```javascript
+  // bad
+  var count = 1;
+  if (true) {
+    count += 1;
+  }
+
+  // good, use the let.
+  let count = 1;
+  if (true) {
+    count += 1;
+  }
+```
+
+Note that both `let` and `const` are block-scoped.
+
+```javascript
+// const and let only exist in the blocks they are defined in.
+{
+  let a = 1;
+  const b = 1;
 }
-
-var x = new _PrivateClass();  // OK - we’re in the same file.
-var y = new PublicClass();    // OK
-var z = y._privateMember;     // NOT OK!
+console.log(a); // ReferenceError
+console.log(b); // ReferenceError
 ```
 
-Rationale: leading underscores for private methods and properties is
-consistent with the styles used in numerous JavaScript libraries, many
-of which we include in our code base.
+If you must use `var` create new statement for each declaration.
+Yes:
+```js
+var a = "foo";
+var b = a + "bar";
+var c = fn(a, b);
+```
+
+No:
+```js
+var a = "foo",
+b = a + "bar",
+c = fn(a, b);
+```
+
+A single var statement is bad because:
+
+* If you forget a comma, you just made a global
+* It originated when people wanted to save bytes, but we have a minifier
+* It makes line-based diffs/editing messier
+* It encourages C89-style declarations at the top of scope, preventing
+you from only declaring vars before first use, the latter preferable
+as it conveys intended scope to the reader
 
 
-Don't save references to `this`. Use arrow functions or [Function#bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind). jscs: [`disallowNodeTypes`](http://jscs.info/rule/disallowNodeTypes)
+#### Strings
+
+
+Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
+
+```javascript
+// bad
+const name = "Capt. Janeway";
+
+// bad - template literals should contain interpolation or newlines
+const name = `Capt. Janeway`;
+
+// good
+const name = 'Capt. Janeway';
+```
+
+Strings that cause the line to go over 100 characters should not be written across multiple lines using string concatenation.
+
+    > Why? Broken strings are painful to work with and make code less searchable.
+
+```javascript
+   // bad
+   const errorMessage = 'This is a super long error that was thrown because \
+   of Batman. When you stop to think about how Batman had anything to do \
+   with this, you would get nowhere \
+   fast.';
+
+   // bad
+   const errorMessage = 'This is a super long error that was thrown because ' +
+     'of Batman. When you stop to think about how Batman had anything to do ' +
+     'with this, you would get nowhere fast.';
+
+   // good
+   const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+   ```
+
+When programmatically building up strings, use template strings instead of concatenation. eslint: [`prefer-template`](http://eslint.org/docs/rules/prefer-template.html) [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing) jscs: [`requireTemplateStrings`](http://jscs.info/rule/requireTemplateStrings)
+
+   > Why? Template strings give you a readable, concise syntax with proper newlines and string interpolation features.
 
 ```javascript
   // bad
-  function foo() {
-    const self = this;
-    return function () {
-      console.log(self);
-    };
+  function sayHi(name) {
+    return ['How are you, ', name, '?'].join();
   }
 
   // bad
-  function foo() {
-    const that = this;
-    return function () {
-      console.log(that);
-    };
+  function sayHi(name) {
+    return `How are you, ${ name }?`;
   }
 
   // good
-  function foo() {
-    return () => {
-      console.log(this);
-    };
+  function sayHi(name) {
+    return `How are you, ${name}?`;
   }
 ```
 
-A base filename should exactly match the name of its default export.
+Never use `eval()` on a string, it opens too many vulnerabilities.
+
+Do not unnecessarily escape characters in strings. eslint: [`no-useless-escape`](http://eslint.org/docs/rules/no-useless-escape)
+
+> Why? Backslashes harm readability, thus they should only be present when necessary.
 
 ```javascript
-  // file 1 contents
-  class CheckBox {
+// bad
+const foo = '\'this\' \i\s \"quoted\"';
+
+// good
+const foo = '\'this\' is "quoted"';
+const foo = `my name is '${name}'`;
+```
+
+
+
+#### Comparison Operators & Equality
+
+Prefer `===` (strict equality) to `==` due to the [numerous oddities
+related to JavaScript's type coercion](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/).
+
+The only valid use of `==` is for comparing against null and undefined
+at the same time:
+
+```js
+// Check null and undefined, but distinguish between other falsey values
+if (someVariable == null) {
+  ...
+}
+```
+
+Though you will often want to just check against falsey values, and
+can just say `if (!someVariable) {...}`.
+
+
+Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+
+  + **Objects** evaluate to **true**
+  + **Undefined** evaluates to **false**
+  + **Null** evaluates to **false**
+  + **Booleans** evaluate to **the value of the boolean**
+  + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
+  + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+
+```javascript
+  if ([0] && []) {
+    // true
+    // an array (even an empty one) is an object, objects will evaluate to true
+  }
+```
+
+Use shortcuts for booleans, but explicit comparisons for strings and numbers.
+
+```javascript
+  // bad
+  if (isValid === true) {
     // ...
   }
-  export default CheckBox;
-
-  // file 2 contents
-  export default function fortyTwo() { return 42; }
-
-  // file 3 contents
-  export default function insideDirectory() {}
-
-  // in some other file
-  // bad
-  import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
-  import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
-  import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
-
-  // bad
-  import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
-  import forty_two from './forty_two'; // snake_case import/filename, camelCase export
-  import inside_directory from './inside_directory'; // snake_case import, camelCase export
-  import index from './inside_directory/index'; // requiring the index file explicitly
-  import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
 
   // good
-  import CheckBox from './CheckBox'; // PascalCase export/import/filename
-  import fortyTwo from './fortyTwo'; // camelCase export/import/filename
-  import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
-  // ^ supports both insideDirectory.js and insideDirectory/index.js
-```
-
-Use camelCase when you export-default a function. Your filename should be identical to your function's name.
-
-```javascript
-  function makeStyleGuide() {
+  if (isValid) {
     // ...
   }
 
-  export default makeStyleGuide;
+  // bad
+  if (name) {
+    // ...
+  }
+
+  // good
+  if (name !== '') {
+    // ...
+  }
+
+  // bad
+  if (collection.length) {
+    // ...
+  }
+
+  // good
+  if (collection.length > 0) {
+    // ...
+  }
 ```
 
-Use PascalCase when you export a constructor / class / singleton / function library / bare object.
+For more information see [Truth Equality and JavaScript](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
 
-```javascript
-  const FugitiveLabsStyleGuide = {
-    es6: {
-    },
-  };
+Use braces to create blocks in `case` and `default` clauses that contain lexical declarations (e.g. `let`, `const`, `function`, and `class`).
 
-  export default FugitiveLabsStyleGuide;
-```
+  > Why? Lexical declarations are visible in the entire `switch` block but only get initialized when assigned, which only happens when its `case` is reached. This causes problems when multiple `case` clauses attempt to define the same thing.
 
-Acronyms and initialisms should always be all capitalized, or all lowercased.
-
-  > Why? Names are for readability, not to appease a computer algorithm.
+  eslint rules: [`no-case-declarations`](http://eslint.org/docs/rules/no-case-declarations.html).
 
 ```javascript
   // bad
-  import SmsContainer from './containers/SmsContainer';
+  switch (foo) {
+    case 1:
+      let x = 1;
+      break;
+    case 2:
+      const y = 2;
+      break;
+    case 3:
+      function f() {
+        // ...
+      }
+      break;
+    default:
+      class C {}
+  }
 
+  // good
+  switch (foo) {
+    case 1: {
+      let x = 1;
+      break;
+    }
+    case 2: {
+      const y = 2;
+      break;
+    }
+    case 3: {
+      function f() {
+        // ...
+      }
+      break;
+    }
+    case 4:
+      bar();
+      break;
+    default: {
+      class C {}
+    }
+  }
+```
+
+Ternaries should not be nested and generally be single line expressions. eslint rules: [`no-nested-ternary`](http://eslint.org/docs/rules/no-nested-ternary.html).
+
+```javascript
   // bad
-  const HttpRequests = [
-    // ...
-  ];
+  const foo = maybe1 > maybe2
+    ? "bar"
+    : value1 > value2 ? "baz" : null;
 
-  // good
-  import SMSContainer from './containers/SMSContainer';
+  // better
+  const maybeNull = value1 > value2 ? 'baz' : null;
 
-  // good
-  const HTTPRequests = [
-    // ...
-  ];
+  const foo = maybe1 > maybe2
+    ? 'bar'
+    : maybeNull;
 
   // best
-  import TextMessageContainer from './containers/TextMessageContainer';
+  const maybeNull = value1 > value2 ? 'baz' : null;
 
-  // best
-  const Requests = [
-    // ...
-  ];
+  const foo = maybe1 > maybe2 ? 'bar' : maybeNull;
 ```
+
+Avoid unneeded ternary statements. eslint rules: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary.html).
+
+```javascript
+  // bad
+  const foo = a ? a : b;
+  const bar = c ? true : false;
+  const baz = c ? false : true;
+
+  // good
+  const foo = a || b;
+  const bar = !!c;
+  const baz = !c;
+```
+
+#### Array and Object literals
+
+Always use `[]` and `{}` style literals to initialize arrays and
+objects, not the `Array` and `Object` constructors.
+
+Array constructors are error-prone due to their arguments: `new
+Array(3)` yields `[undefined, undefined, undefined]`, not `[3]`.
+
+To avoid these kinds of weird cases, always use the more readable
+array literal.
+
+Object constructors don't have the same problems, but follow the same
+rule for consistency with arrays.  Plus, `{}` is more readable.
+
+
+
+#### Avoid `href="#"` for JavaScript triggers
+
+When you want a link-like thing rather than a button to trigger a
+JavaScript operation, rather than going to a new address.
+
+Here's a discussion on Stack Overflow about options:
+http://stackoverflow.com/questions/134845/href-tag-for-javascript-links-or-javascriptvoid0
+
+
+Yes:
+```js
+<a href="javascript:void 0">Flag</a>
+```
+
+No:
+```js
+<a href="#">Flag</a>
+```
+
+---------------
+### ES6/7 rules
+
+Several of our supported browsers support only ES5 natively.  We use
+polyfills to emulate [some -- but not all -- ES6 and ES7 language
+features](https://docs.google.com/spreadsheets/d/12mF99oCpERzLKS07wPPV3GiISUa8bPkKveuHsESDYHU/edit#gid=0)
+so they run on ES5-capable browsers.
+
+In some cases, we do not yet allow a new language feature, if it's
+expensive to polyfill.  In others, we require using the newer language
+feature and avoiding the old:
+
+| Construct | Use...                                | ...instead of |
+| --------- | ------------------------------------- | ---------------------- |
+| backticks | `` `http://${host}/${path}` `` | `"http://" + host + "/" + path` |
+| destructuring | `var {x, y} = a;` | `var x = a.x; var y = a.y;` |
+| fat arrow | `foo(() => {...})` | `foo(function() {...}.bind(this))` |
+| let/const | `let a = 1; const b = "4EVAH"; a++;` | `var a = 1; var b = "4EVAH"; a++;` |
+| includes | `array.includes(item)` | `array.indexOf(item) !== -1` |
+| for/of | `for (const [key, value] of Object.entries(obj)) {...}` | `_.each(obj, function(value, key) {...})` |
+| spread | `{...a, ...b, c: d}` | `_.extend({}, a, b, {c: d})` |
+| rest params | `function(bar, ...args) {foo(...args);}` | `function(bar) {var args = Array.prototype.slice.call(arguments, 1); foo.apply(null, args);}` |
+
+#### Use `=>` instead of `bind(this)`
+
+Arrow functions are easier to read (and with Babel, more efficient)
+than calling `bind` manually.
+
+#### Use rest params instead of `arguments`
+
+The magic `arguments` variable has some odd quirks. It's simpler to
+use rest params like `(...args) => foo(args)`.
+
+#### Use backticks for string interpolation
+
+`+` is not forbidden, but backticks are encouraged!
+
+#### Use ES6 classes for React classes
+
+See [React Use ES6 classes](react.md#use-es6-classes) for details.
+
+For classes outside of React -- which should actually be pretty rare -- you
+should also use ES6 classes.  Some things to keep in mind when using ES6
+classes:
+
+- Use `static` properties instead of adding properties to the class object
+  after defining the class.
+- Use `extend` syntax for inheritance.
