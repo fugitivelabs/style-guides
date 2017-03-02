@@ -2,14 +2,14 @@
 
 ----
 * [Naming Conventions](#naming-conventions)
-  * [Naming private methods and properties](#naming-private-methods-and-properties)
-  * [File names](#file-names)
+  * [Files](#files)
+  * [Namespacing](#namespacing)
 * [Syntax](#syntax)
-  * [Indentation](#indentation)
+  * [Whitespace](#whitespace)
+  * [Commas](#commas)
+  * [Semicolons](#semicolons)
   * [Braces](#braces)
-  * [Spaces](#spaces)
-  * [Line length](#line-length)
-  * [require() lines.](#require-lines)
+  * [Require and Import](#require-and-import)
 * [Comments and documentation](#comments-and-documentation)
   * [Inline Comments](#inline-comments)
   * [Top level file and class comments](#top-level-file-and-class-comments)
@@ -37,7 +37,7 @@ This guide is adapted from the Khan Academy and AirBng style guides.
 
 ## Naming Conventions
 
-#### Files
+### Files
 
 ```
 genericFileNamesLikeThis.js
@@ -74,7 +74,7 @@ resources/
 ```
 
 
-#### Namespaceing
+### Namespaceing
 
 Avoid single letter names. Be descriptive with your naming. eslint: [`id-length`](http://eslint.org/docs/rules/id-length)
 
@@ -271,7 +271,7 @@ Acronyms and initialisms should always be all capitalized, or all lowercased.
 
 ## Syntax
 
-#### Whitespace
+### Whitespace
 
 **Always** use soft tabs (space character) set to 2 spaces. eslint: [`indent`](http://eslint.org/docs/rules/indent.html) jscs: [`validateIndentation`](http://jscs.info/rule/validateIndentation)
 
@@ -583,7 +583,7 @@ Avoid having lines of code that are longer than 100 characters (including whites
     .fail(() => console.log('You have failed this city.'));
 ```
 
-#### Commas
+### Commas
 
 Slightly controversially, we prefer leading commas for readability, ease of commenting, and eliminating the trailing comma problem.
 
@@ -623,7 +623,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 
 
 
-#### Semicolons
+### Semicolons
 
 **Yup.** eslint: [`semi`](http://eslint.org/docs/rules/semi.html) jscs: [`requireSemicolons`](http://jscs.info/rule/requireSemicolons)
 
@@ -651,7 +651,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 
 
 
-#### Braces
+### Braces
 
 Braces should always be used on blocks.
 
@@ -681,7 +681,7 @@ if (true)
     blah();
 ```
 
-#### `require()` & `import` lines.
+### Require and Import
 
 Import or `require()` base library code first.
 
@@ -891,7 +891,7 @@ Use `// TODO:` to annotate solutions to problems.
 
 
 
-#### Methods and properties comments
+### Methods and properties comments
 
 All non-trivial methods and properties should also have JSDoc comments.
 
@@ -941,7 +941,7 @@ class ExerciseList extends Base {
 }
 ```
 
-#### Console logs
+### Console logs
 
 Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in production deployment.
 
@@ -956,7 +956,7 @@ Prefer verbose documentation in with comments.
 
 ## Core language rules
 
-#### References
+### References
 Use `const` for all of your references; avoid using `var`. eslint: [`prefer-const`](http://eslint.org/docs/rules/prefer-const.html), [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign.html)
 
 > Why? This ensures that you can't reassign your references, which can lead to bugs and difficult to comprehend code.
@@ -1026,7 +1026,7 @@ you from only declaring vars before first use, the latter preferable
 as it conveys intended scope to the reader
 
 
-#### Strings
+### Strings
 
 
 Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
@@ -1100,7 +1100,7 @@ const foo = `my name is '${name}'`;
 
 
 
-#### Comparison Operators & Equality
+### Comparison Operators & Equality
 
 Prefer `===` (strict equality) to `==` due to the [numerous oddities
 related to JavaScript's type coercion](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/).
@@ -1255,7 +1255,7 @@ Avoid unneeded ternary statements. eslint rules: [`no-unneeded-ternary`](http://
   const baz = !c;
 ```
 
-#### Array and Object literals
+### Array and Object literals
 
 Always use `[]` and `{}` style literals to initialize arrays and
 objects, not the `Array` and `Object` constructors.
@@ -1271,7 +1271,7 @@ rule for consistency with arrays.  Plus, `{}` is more readable.
 
 
 
-#### Avoid `href="#"` for JavaScript triggers
+### Avoid `href="#"` for JavaScript triggers
 
 When you want a link-like thing rather than a button to trigger a
 JavaScript operation, rather than going to a new address.
@@ -1313,21 +1313,21 @@ feature and avoiding the old:
 | spread | `{...a, ...b, c: d}` | `_.extend({}, a, b, {c: d})` |
 | rest params | `function(bar, ...args) {foo(...args);}` | `function(bar) {var args = Array.prototype.slice.call(arguments, 1); foo.apply(null, args);}` |
 
-#### Use `=>` instead of `bind(this)`
+### Use `=>` instead of `bind(this)`
 
 Arrow functions are easier to read (and with Babel, more efficient)
 than calling `bind` manually.
 
-#### Use rest params instead of `arguments`
+### Use rest params instead of `arguments`
 
 The magic `arguments` variable has some odd quirks. It's simpler to
 use rest params like `(...args) => foo(args)`.
 
-#### Use backticks for string interpolation
+### Use backticks for string interpolation
 
 `+` is not forbidden, but backticks are encouraged!
 
-#### Use ES6 classes for React classes
+### Use ES6 classes for React classes
 
 See [React Use ES6 classes](react.md#use-es6-classes) for details.
 
