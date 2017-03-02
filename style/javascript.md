@@ -1360,3 +1360,5 @@ classes:
 - Use `static` properties instead of adding properties to the class object
   after defining the class.
 - Use `extend` syntax for inheritance.
+
+**[⬆ back to top](#table-of-contents)**
