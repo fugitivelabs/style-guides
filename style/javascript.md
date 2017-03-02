@@ -16,11 +16,11 @@
   * [Top level file and class comments](#top-level-file-and-class-comments)
   * [Methods and properties comments](#methods-and-properties-comments)
 * [Core language rules](#core-language-rules)
-  * [Equality](#equality)
+  * [References](#references)
+  * [Strings](#strings)
+  * [Comparison Operators and Equality](#comparison-operators-and-equality)
   * [Array and Object literals](#array-and-object-literals)
-  * [Use a new var statement for each declaration](#use-a-new-var-statement-for-each-declaration)
   * [Avoid href="#" for JavaScript triggers](#avoid-href-for-javascript-triggers)
-  * [Use modules, not global variables](#use-modules-not-global-variables)
 * [ES6/7 rules](#es67-rules)
   * [Use =&gt; instead of bind(this)](#use--instead-of-bindthis)
   * [Use backticks for string interpolation](#use-backticks-for-string-interpolation)
@@ -32,7 +32,7 @@
 
 ----
 
-This guide is adapted from the Khan Academy and AirBng style guides.
+This guide is adapted from the Khan Academy and AirBnb style guides.
 
 ----------
 
@@ -1122,7 +1122,7 @@ const foo = `my name is '${name}'`;
 **[⬆ back to top](#table-of-contents)**
 
 
-### Comparison Operators & Equality
+### Comparison Operators and Equality
 
 Prefer `===` (strict equality) to `==` due to the [numerous oddities
 related to JavaScript's type coercion](https://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/).
