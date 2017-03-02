@@ -73,6 +73,7 @@ resources/
 
 ```
 
+**[⬆ back to top](#table-of-contents)**
 
 ### Namespaceing
 
@@ -269,7 +270,11 @@ Acronyms and initialisms should always be all capitalized, or all lowercased.
   ];
 ```
 
-## Syntax
+**[⬆ back to top](#table-of-contents)**
+
+##
+
+**[⬆ back to top](#table-of-contents)****[⬆ back to t**[⬆ back to top](#table-of-contents)**op](#table-of-contents)**Syntax
 
 ### Whitespace
 
@@ -581,7 +586,9 @@ Avoid having lines of code that are longer than 100 characters (including whites
   })
     .done(() => console.log('Congratulations!'))
     .fail(() => console.log('You have failed this city.'));
-```
+```**[⬆ back to top](#table-of-contents)**
+
+**[**[⬆ back to top](#table-of-contents)**⬆ back to top](#table-of-contents)**
 
 ### Commas
 
@@ -621,7 +628,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 ```
 
 
-
+**[⬆ back to top](#table-of-contents)****[⬆ back to top](#table-of-contents)**
 
 ### Semicolons
 
@@ -649,7 +656,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 
 [Read more](https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function/7365214%237365214).
 
-
+**[⬆ back to top](#table-of-contents)**
 
 ### Braces
 
@@ -680,8 +687,11 @@ No:
 if (true)
     blah();
 ```
+**[⬆ back to top](#table-of-contents)**
 
-### Require and Import
+**[⬆ back to top](#table-of-contents)**
+
+## Require and Import
 
 Import or `require()` base library code first.
 
@@ -754,9 +764,10 @@ import ProductList from './ProductList.js.jsx';
 
 ```
 
+**[⬆ back to top](#table-of-contents)**
 
 ------------------------------
-### Comments and documentation
+## Comments and documentation
 
 Use `/** ... */` for multi-line comments.
 
@@ -889,7 +900,9 @@ Use `// TODO:` to annotate solutions to problems.
   }
 ```
 
+**[⬆ back to top](#table-of-contents)**
 
+**[⬆ back to top](#table-of-contents)**
 
 ### Methods and properties comments
 
@@ -941,6 +954,8 @@ class ExerciseList extends Base {
 }
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Console logs
 
 Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in production deployment.
@@ -951,6 +966,8 @@ Only use `console.log(...)` during active development. If you feel they're impor
     3. It's ugly
 
 Prefer verbose documentation in with comments.
+
+**[⬆ back to top](#table-of-contents)**
 
 -----------------------
 
@@ -1026,6 +1043,8 @@ you from only declaring vars before first use, the latter preferable
 as it conveys intended scope to the reader
 
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Strings
 
 
@@ -1098,7 +1117,7 @@ const foo = '\'this\' is "quoted"';
 const foo = `my name is '${name}'`;
 ```
 
-
+**[⬆ back to top](#table-of-contents)**
 
 ### Comparison Operators & Equality
 
@@ -1255,6 +1274,8 @@ Avoid unneeded ternary statements. eslint rules: [`no-unneeded-ternary`](http://
   const baz = !c;
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
 ### Array and Object literals
 
 Always use `[]` and `{}` style literals to initialize arrays and
@@ -1269,7 +1290,7 @@ array literal.
 Object constructors don't have the same problems, but follow the same
 rule for consistency with arrays.  Plus, `{}` is more readable.
 
-
+**[⬆ back to top](#table-of-contents)**
 
 ### Avoid `href="#"` for JavaScript triggers
 
@@ -1290,8 +1311,11 @@ No:
 <a href="#">Flag</a>
 ```
 
+
+**[⬆ back to top](#table-of-contents)**
+
 ---------------
-### ES6/7 rules
+## ES6/7 rules
 
 Several of our supported browsers support only ES5 natively.  We use
 polyfills to emulate [some -- but not all -- ES6 and ES7 language
@@ -1313,21 +1337,19 @@ feature and avoiding the old:
 | spread | `{...a, ...b, c: d}` | `_.extend({}, a, b, {c: d})` |
 | rest params | `function(bar, ...args) {foo(...args);}` | `function(bar) {var args = Array.prototype.slice.call(arguments, 1); foo.apply(null, args);}` |
 
-### Use `=>` instead of `bind(this)`
+
+
+Use `=>` instead of `bind(this)`
 
 Arrow functions are easier to read (and with Babel, more efficient)
 than calling `bind` manually.
 
-### Use rest params instead of `arguments`
 
-The magic `arguments` variable has some odd quirks. It's simpler to
-use rest params like `(...args) => foo(args)`.
+Use backticks for string interpolation
 
-### Use backticks for string interpolation
+  > `+` is not forbidden, but backticks are encouraged!
 
-`+` is not forbidden, but backticks are encouraged!
-
-### Use ES6 classes for React classes
+Use ES6 classes for React classes
 
 See [React Use ES6 classes](react.md#use-es6-classes) for details.
 
