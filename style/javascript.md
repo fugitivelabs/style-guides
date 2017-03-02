@@ -1,7 +1,7 @@
 ## JavaScript Style Guide
 
 ----
-* [Naming Conventions](#naming)
+* [Naming Conventions](#naming-conventions)
   * [Naming private methods and properties](#naming-private-methods-and-properties)
   * [File names](#file-names)
 * [Syntax](#syntax)
