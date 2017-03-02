@@ -903,7 +903,6 @@ Use `// TODO:` to annotate solutions to problems.
 
 **[⬆ back to top](#table-of-contents)**
 
-**[⬆ back to top](#table-of-contents)**
 
 ### Methods and properties comments
 
@@ -957,6 +956,7 @@ class ExerciseList extends Base {
 
 **[⬆ back to top](#table-of-contents)**
 
+
 ### Console logs
 
 Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in production deployment.
@@ -969,6 +969,7 @@ Only use `console.log(...)` during active development. If you feel they're impor
 Prefer verbose documentation in with comments.
 
 **[⬆ back to top](#table-of-contents)**
+
 
 -----------------------
 
@@ -1046,8 +1047,8 @@ as it conveys intended scope to the reader
 
 **[⬆ back to top](#table-of-contents)**
 
-### Strings
 
+### Strings
 
 Use single quotes `''` for strings. eslint: [`quotes`](http://eslint.org/docs/rules/quotes.html) jscs: [`validateQuoteMarks`](http://jscs.info/rule/validateQuoteMarks)
 
@@ -1119,6 +1120,7 @@ const foo = `my name is '${name}'`;
 ```
 
 **[⬆ back to top](#table-of-contents)**
+
 
 ### Comparison Operators & Equality
 
@@ -1277,6 +1279,7 @@ Avoid unneeded ternary statements. eslint rules: [`no-unneeded-ternary`](http://
 
 **[⬆ back to top](#table-of-contents)**
 
+
 ### Array and Object literals
 
 Always use `[]` and `{}` style literals to initialize arrays and
@@ -1292,6 +1295,7 @@ Object constructors don't have the same problems, but follow the same
 rule for consistency with arrays.  Plus, `{}` is more readable.
 
 **[⬆ back to top](#table-of-contents)**
+
 
 ### Avoid `href="#"` for JavaScript triggers
 
@@ -1314,6 +1318,7 @@ No:
 
 
 **[⬆ back to top](#table-of-contents)**
+
 
 ---------------
 ## ES6/7 rules
