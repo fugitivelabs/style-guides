@@ -34,14 +34,14 @@ This guide is adapted from the Khan Academy and AirBnb style guides.
 
 ### Files
 
-```
+```js
 genericFileNamesLikeThis.js
 ModelNamesLikeThis.js
-JsxFileNamesLikeThis.js.jsx // show the extension
+JSXFileNamesLikeThis.js.jsx // NOTE: show the extension
 ```
 Filenames should be verbose enough to determine what you're looking at by glancing at the top of your editor.
 
-  > Why? When working in SublimeText or Atom or most any other editor, it's a terrible experience to have mulitple files open all named `controller.js`
+  > Why? When working in SublimeText or Atom or most any other editor, it's a terrible experience to have multiple files open all named `controller.js`
 
 ```js
 // bad
@@ -580,9 +580,9 @@ Avoid having lines of code that are longer than 100 characters (including whites
   })
     .done(() => console.log('Congratulations!'))
     .fail(() => console.log('You have failed this city.'));
-```**[⬆ back to top](#table-of-contents)**
+```
 
-**[**[⬆ back to top](#table-of-contents)**⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 ### Commas
 
@@ -1227,9 +1227,10 @@ Use braces to create blocks in `case` and `default` clauses that contain lexical
       }
       break;
     }
-    case 4:
+    case 4: {
       bar();
       break;
+    }
     default: {
       class C {}
     }
