@@ -24,6 +24,7 @@
   * [Leading Whitespace](#leading-whitespace)
   * [Annotations](#annotations)
   * [Methods and properties comments](#methods-and-properties-comments)
+  * [Console Logs](#console-logs)
 
 
 ----
@@ -1407,10 +1408,10 @@ class ExerciseList extends Base {
 Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in a production environment.
 
   > Why? A few reasons.  
-    1. This causes memory leaks in the client (particularly in ReactNative).
-    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug.  
+    1. This causes memory leaks in the client - particularly in ReactNative
+    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug  
     3. It's ugly
 
-Prefer verbose documentation in with comments.
+Instead prefer verbose documentation in with comments.
 
 **[⬆ back to top](#table-of-contents)**
