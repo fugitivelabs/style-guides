@@ -1409,8 +1409,8 @@ Only use `console.log(...)` during active development. If you feel they're impor
 
   > Why? A few reasons.  
     1. This causes memory leaks in the client - particularly in ReactNative
-    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug  
-    3. It's ugly
+    1. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug  
+    1. It's ugly
 
 Instead prefer verbose documentation in with comments.
 
