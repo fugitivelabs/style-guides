@@ -18,7 +18,8 @@
   * [Tags](#tags)
   * [Methods](#methods)
   * [Ordering](#ordering)
-  * [Conditionals](#conditionals)
+  * [References](#references)
+  * [Conditionals in `render()`](#conditionals-in-render())
   * [`isMounted`](#ismounted)
 
 ----
