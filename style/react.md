@@ -19,8 +19,8 @@
   * [Methods](#methods)
   * [Ordering](#ordering)
   * [References](#references)
-  * [Conditionals in `render()`](#conditionals-in-render())
-  * [`isMounted`](#ismounted)
+  * [Conditionals in `render`](#conditionals-in-render)
+
 
 ----
 
