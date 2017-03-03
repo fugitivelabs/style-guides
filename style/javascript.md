@@ -11,10 +11,6 @@
   * [Semicolons](#semicolons)
   * [Braces](#braces)
   * [Require and Import](#require-and-import)
-* [Comments and documentation](#comments-and-documentation)
-  * [Inline Comments](#inline-comments)
-  * [Top level file and class comments](#top-level-file-and-class-comments)
-  * [Methods and properties comments](#methods-and-properties-comments)
 * [Core language rules](#core-language-rules)
   * [References](#references)
   * [Strings](#strings)
@@ -22,6 +18,10 @@
   * [Array and Object literals](#array-and-object-literals)
   * [Avoid href="#" for JavaScript triggers](#avoid-href-for-javascript-triggers)
 * [ES6/7 rules](#es67-rules)
+* [Comments and documentation](#comments-and-documentation)
+  * [Inline Comments](#inline-comments)
+  * [Top level file and class comments](#top-level-file-and-class-comments)
+  * [Methods and properties comments](#methods-and-properties-comments)
 
 
 ----
@@ -777,222 +777,6 @@ import ProductList from './ProductList.js.jsx';
 
 **[⬆ back to top](#table-of-contents)**
 
-------------------------------
-## Comments and documentation
-
-Use `/** ... */` for multi-line comments.
-
-```javascript
-  // bad
-  // make() returns a new element
-  // based on the passed in tag name
-  //
-  // @param {String} tag
-  // @return {Element} element
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-
-  // good
-  /**
-   * make() returns a new element
-   * based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-```
-
-Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
-
-```javascript
-  // bad
-  const active = true;  // is current tab
-
-  // good
-  // is current tab
-  const active = true;
-
-  // bad
-  function getType() {
-    console.log('fetching type...');
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-
-  // good
-  function getType() {
-    console.log('fetching type...');
-
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-
-  // also good
-  function getType() {
-    // set the default type to 'no type'
-    const type = this.type || 'no type';
-
-    return type;
-  }
-```
-
-Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
-
-```javascript
-  // bad
-  //is current tab
-  const active = true;
-
-  // good
-  // is current tab
-  const active = true;
-
-  // bad
-  /**
-   *make() returns a new element
-   *based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-
-  // good
-  /**
-   * make() returns a new element
-   * based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-```
-
-Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
-
-Use `// FIXME:` to annotate problems.
-
-```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
-
-      // FIXME: shouldn't use a global here
-      total = 0;
-    }
-  }
-```
-
-Use `// TODO:` to annotate solutions to problems.
-
-```javascript
-  class Calculator extends Abacus {
-    constructor() {
-      super();
-
-      // TODO: total should be configurable by an options param
-      this.total = 0;
-    }
-  }
-```
-
-Prefix you comments with `NOTE` when pointing out some unique characteristic about the snippet
-
-```js
-
-  return Object.assign({}, state, {
-    lists: Object.assign({}, state.lists, {
-      // NOTE:  This is a badass line of elegant code right here
-      [action.listArgs[0]]: productList(state.lists[action.listArgs[0]] || {}, action)
-    })
-  })
-
-```
-
-**[⬆ back to top](#table-of-contents)**
-
-
-### Methods and properties comments
-
-All non-trivial methods and properties should also have JSDoc comments.
-
-Type annotations are strongly encouraged; if there is even a slight
-chance that the type will be ambiguous to future readers, put in a
-type annotation.
-
-Type annotations are based on the ES4/JS2 type system, and are
-documented in the [Google JavaScript style
-guide](https://google.github.io/styleguide/javascriptguide.xml).
-
-`@param` and `@return` type annotations that have comments that do not
-fit on one line wrap to the next line and indent 2 spaces.
-
-Example:
-
-```js
-/**
- * A UI component allows users to select from a list of exercises within
- * a table.
- * Expects an array of exercise IDs as a prop.
- */
-
-class ExerciseList extends Base {
-  constructor(props) {
-    super(props);
-    /**
-     * Check if the exercise list is available at render,
-     * otherwise, set the state to an empty array
-     */
-    this.state = {
-      exercises: props.exercises || []
-    }
-    this._bind(
-      '_showExercise'
-    )
-  }
-
-  /**
-   * Determines which exercise to display
-   * @param {string=} id the database ID of the exercise
-   */
-  _showExercise(id) {
-    // ...
-  }
-  // ...
-}
-```
-
-**[⬆ back to top](#table-of-contents)**
-
-
-### Console logs
-
-Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in a production environment.
-
-  > Why? A few reasons.  
-    1. This causes memory leaks in the client (particularly in ReactNative).
-    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug.  
-    3. It's ugly
-
-Prefer verbose documentation in with comments.
-
-**[⬆ back to top](#table-of-contents)**
-
 
 -----------------------
 
@@ -1390,5 +1174,222 @@ classes:
 - Use `static` properties instead of adding properties to the class object
   after defining the class.
 - Use `extend` syntax for inheritance.
+
+**[⬆ back to top](#table-of-contents)**
+
+
+------------------------------
+## Comments and documentation
+
+Use `/** ... */` for multi-line comments.
+
+```javascript
+  // bad
+  // make() returns a new element
+  // based on the passed in tag name
+  //
+  // @param {String} tag
+  // @return {Element} element
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+
+  // good
+  /**
+   * make() returns a new element
+   * based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+```
+
+Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
+
+```javascript
+  // bad
+  const active = true;  // is current tab
+
+  // good
+  // is current tab
+  const active = true;
+
+  // bad
+  function getType() {
+    console.log('fetching type...');
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+
+  // good
+  function getType() {
+    console.log('fetching type...');
+
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+
+  // also good
+  function getType() {
+    // set the default type to 'no type'
+    const type = this.type || 'no type';
+
+    return type;
+  }
+```
+
+Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
+
+```javascript
+  // bad
+  //is current tab
+  const active = true;
+
+  // good
+  // is current tab
+  const active = true;
+
+  // bad
+  /**
+   *make() returns a new element
+   *based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+
+  // good
+  /**
+   * make() returns a new element
+   * based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+```
+
+Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
+
+Use `// FIXME:` to annotate problems.
+
+```javascript
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // FIXME: shouldn't use a global here
+      total = 0;
+    }
+  }
+```
+
+Use `// TODO:` to annotate solutions to problems.
+
+```javascript
+  class Calculator extends Abacus {
+    constructor() {
+      super();
+
+      // TODO: total should be configurable by an options param
+      this.total = 0;
+    }
+  }
+```
+
+Prefix you comments with `NOTE` when pointing out some unique characteristic about the snippet
+
+```js
+
+  return Object.assign({}, state, {
+    lists: Object.assign({}, state.lists, {
+      // NOTE:  This is a badass line of elegant code right here
+      [action.listArgs[0]]: productList(state.lists[action.listArgs[0]] || {}, action)
+    })
+  })
+
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+### Methods and properties comments
+
+All non-trivial methods and properties should also have JSDoc comments.
+
+Type annotations are strongly encouraged; if there is even a slight
+chance that the type will be ambiguous to future readers, put in a
+type annotation.
+
+Type annotations are based on the ES4/JS2 type system, and are
+documented in the [Google JavaScript style
+guide](https://google.github.io/styleguide/javascriptguide.xml).
+
+`@param` and `@return` type annotations that have comments that do not
+fit on one line wrap to the next line and indent 2 spaces.
+
+Example:
+
+```js
+/**
+ * A UI component allows users to select from a list of exercises within
+ * a table.
+ * Expects an array of exercise IDs as a prop.
+ */
+
+class ExerciseList extends Base {
+  constructor(props) {
+    super(props);
+    /**
+     * Check if the exercise list is available at render,
+     * otherwise, set the state to an empty array
+     */
+    this.state = {
+      exercises: props.exercises || []
+    }
+    this._bind(
+      '_showExercise'
+    )
+  }
+
+  /**
+   * Determines which exercise to display
+   * @param {string=} id the database ID of the exercise
+   */
+  _showExercise(id) {
+    // ...
+  }
+  // ...
+}
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+### Console logs
+
+Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in a production environment.
+
+  > Why? A few reasons.  
+    1. This causes memory leaks in the client (particularly in ReactNative).
+    2. They also naturally tend to build up exponentially over time making it **MORE** difficult to debug.  
+    3. It's ugly
+
+Prefer verbose documentation in with comments.
 
 **[⬆ back to top](#table-of-contents)**
