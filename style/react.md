@@ -641,7 +641,7 @@ This guide is adapted from the Khan Academy and AirBnb style guides.
   ```
 
 
-## Conditionals in `render()`
+## Conditionals in `render`
 
   - Prefer ternary operators inside `render()` when possible
   ```jsx
