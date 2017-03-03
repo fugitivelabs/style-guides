@@ -19,8 +19,10 @@
   * [Avoid href="#" for JavaScript triggers](#avoid-href-for-javascript-triggers)
 * [ES6/7 rules](#es67-rules)
 * [Comments and documentation](#comments-and-documentation)
-  * [Inline Comments](#inline-comments)
-  * [Top level file and class comments](#top-level-file-and-class-comments)
+  * [Single Line Comments](#single-line-comments)
+  * [Multi-line Comments](#multi-line-comments)
+  * [Leading Whitespace](#leading-whitespace)
+  * [Annotations](#annotations)
   * [Methods and properties comments](#methods-and-properties-comments)
 
 
@@ -1181,34 +1183,7 @@ classes:
 ------------------------------
 ## Comments and documentation
 
-Use `/** ... */` for multi-line comments.
-
-```javascript
-  // bad
-  // make() returns a new element
-  // based on the passed in tag name
-  //
-  // @param {String} tag
-  // @return {Element} element
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-
-  // good
-  /**
-   * make() returns a new element
-   * based on the passed-in tag name
-   */
-  function make(tag) {
-
-    // ...
-
-    return element;
-  }
-```
+### Single Line Comments
 
 Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment unless it's on the first line of a block.
 
@@ -1248,6 +1223,46 @@ Use `//` for single line comments. Place single line comments on a newline above
   }
 ```
 
+**[⬆ back to top](#table-of-contents)**
+
+
+### Multi-line Comments
+
+
+Use `/** ... */` for multi-line comments.
+
+```javascript
+  // bad
+  // make() returns a new element
+  // based on the passed in tag name
+  //
+  // @param {String} tag
+  // @return {Element} element
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+
+  // good
+  /**
+   * make() returns a new element
+   * based on the passed-in tag name
+   */
+  function make(tag) {
+
+    // ...
+
+    return element;
+  }
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+### Leading Whitespace
+
 Start all comments with a space to make it easier to read. eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
 
 ```javascript
@@ -1283,6 +1298,12 @@ Start all comments with a space to make it easier to read. eslint: [`spaced-comm
     return element;
   }
 ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+### Annotations
+
 
 Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME: -- need to figure this out` or `TODO: -- need to implement`.
 
