@@ -108,7 +108,7 @@ Use PascalCase only when naming constructors or classes. eslint: [`new-cap`](htt
   }
 
   const bad = new user({
-    name: 'nope',
+    name: 'nope'
   });
 
   // good
@@ -119,7 +119,7 @@ Use PascalCase only when naming constructors or classes. eslint: [`new-cap`](htt
   }
 
   const good = new User({
-    name: 'yup',
+    name: 'yup'
   });
 ```
 
@@ -229,7 +229,7 @@ Use PascalCase when you export a constructor / class / singleton / function libr
 ```javascript
   const FugitiveLabsStyleGuide = {
     es6: {
-    },
+    }
   };
 
   export default FugitiveLabsStyleGuide;
@@ -306,28 +306,38 @@ Place 1 space before the leading brace. eslint: [`space-before-blocks`](http://e
 
   // bad
   dog.set('attr',{
-    age: '1 year',
-    breed: 'Bernese Mountain Dog',
+    age: '1 year'
+    , breed: 'Bernese Mountain Dog'
   });
 
   // good
   dog.set('attr', {
-    age: '1 year',
-    breed: 'Bernese Mountain Dog',
+    age: '1 year'
+    , breed: 'Bernese Mountain Dog'
   });
 ```
 
-Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space between the argument list and the function name in function calls and declarations. eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
+Place no space before the opening parenthesis in control statements (`if`, `while`, `for`, etc.). Place no space between the argument list and the function name in function calls and declarations. eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing.html) jscs: [`requireSpaceAfterKeywords`](http://jscs.info/rule/requireSpaceAfterKeywords)
 
 ```javascript
   // bad
-  if(isJedi) {
+  if (isJedi) {
     fight ();
   }
 
   // good
-  if (isJedi) {
+  if(isJedi) {
     fight();
+  }
+
+  // bad
+  for (let i = 0; i < thing.length; i++) {
+    ...
+  }
+
+  // good
+  for(let i = 0; i < thing.length; i++) {
+    ...
   }
 
   // bad
@@ -439,17 +449,17 @@ Leave a blank line after blocks and before the next statement. jscs: [`requirePa
     foo() {
     },
     bar() {
-    },
+    }
   };
   return obj;
 
   // good
   const obj = {
     foo() {
-    },
+    }
 
-    bar() {
-    },
+    , bar() {
+    }
   };
 
   return obj;
@@ -457,19 +467,23 @@ Leave a blank line after blocks and before the next statement. jscs: [`requirePa
   // bad
   const arr = [
     function foo() {
-    },
-    function bar() {
-    },
+      // ...
+    }
+    , function bar() {
+      // ...
+    }
   ];
   return arr;
 
   // good
   const arr = [
     function foo() {
-    },
+      // ...
+    }
 
-    function bar() {
-    },
+    , function bar() {
+      // ...
+    }
   ];
 
   return arr;
@@ -500,7 +514,7 @@ Do not pad your blocks with blank lines. eslint: [`padded-blocks`](http://eslint
   }
 
   // good
-  if (baz) {
+  if(baz) {
     console.log(qux);
   } else {
     console.log(foo);
@@ -509,7 +523,7 @@ Do not pad your blocks with blank lines. eslint: [`padded-blocks`](http://eslint
 
 Do not add spaces inside parentheses. eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens.html) jscs: [`disallowSpacesInsideParentheses`](http://jscs.info/rule/disallowSpacesInsideParentheses)
 
-```javascript
+```js
   // bad
   function bar( foo ) {
     return foo;
@@ -521,12 +535,12 @@ Do not add spaces inside parentheses. eslint: [`space-in-parens`](http://eslint.
   }
 
   // bad
-  if ( foo ) {
+  if( foo ) {
     console.log(foo);
   }
 
   // good
-  if (foo) {
+  if(foo) {
     console.log(foo);
   }
 ```
@@ -574,9 +588,9 @@ Avoid having lines of code that are longer than 100 characters (including whites
 
   // good
   $.ajax({
-    method: 'POST',
-    url: 'https://airbnb.com/',
-    data: { name: 'John' },
+    method: 'POST'
+    , url: 'https://airbnb.com/'
+    , data: { name: 'John' }
   })
     .done(() => console.log('Congratulations!'))
     .fail(() => console.log('You have failed this city.'));
@@ -613,7 +627,7 @@ Slightly controversially, we prefer leading commas for readability, ease of comm
 
   // good
   const hero = {
-      firstName: 'Ada'
+    firstName: 'Ada'
     , lastName: 'Lovelace'
     , birthYear: 1815
     , superPower: 'computers'
@@ -663,7 +677,7 @@ multiple lines, with the opening brace on the same line.
 
 Yes:
 ```js
-if (true) {
+if(true) {
     blah();
 }
 ```
@@ -671,16 +685,18 @@ if (true) {
 `else/else if/catch` should go on the same line as the brace:
 
 ```js
-if (blah) {
+if(blah) {
     baz();
-} else {
+} else if(oomph) {
     baz2();
+} else {
+    baz3();
 }
 ```
 
 No:
 ```js
-if (true)
+if(true)
     blah();
 ```
 **[⬆ back to top](#table-of-contents)**
@@ -702,31 +718,31 @@ Imports should be sorted lexicographically (as per unix `sort`).
 Yes:
 ```js
 // import base library
-var React = require("react");
+let React = require("react");
 
-var $ = require("jquery");
-var _ = require("lodash");
+let $ = require("jquery");
+let _ = require("lodash");
 
-var APIActionResults = require("../shared-package/api-action-results.js");
-var Cookies = require("../shared-package/cookies.js");
-var DashboardActions = require('./datastores/dashboard-actions.js');
-var HappySurvey = require("../missions-package/happy-survey.jsx");
-var UserMission = require("../missions-package/user-mission.js");
-var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
+let APIActionResults = require("../shared-package/api-action-results.js");
+let Cookies = require("../shared-package/cookies.js");
+let DashboardActions = require('./datastores/dashboard-actions.js');
+let HappySurvey = require("../missions-package/happy-survey.jsx");
+let UserMission = require("../missions-package/user-mission.js");
+let cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
 ```
 
 No:
 ```js
-var $ = require("jquery");
-var APIActionResults = require("../shared-package/api-action-results.js");
-var Cookies = require("../shared-package/cookies.js");
-var cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
-var _ = require("lodash");
-var HappySurvey = require("../missions-package/happy-survey.jsx");
-var DashboardActions = require('./datastores/dashboard-actions.js');
-var React = require("react");
-var UserMission = require("../missions-package/user-mission.js");
-var Kicksend = require("../../third_party/javascript-khansrc/mailcheck/mailcheck.js");
+let $ = require("jquery");
+let APIActionResults = require("../shared-package/api-action-results.js");
+let Cookies = require("../shared-package/cookies.js");
+let cookieStoreRenderer = require("../shared-package/cookie-store.handlebars");
+let _ = require("lodash");
+let HappySurvey = require("../missions-package/happy-survey.jsx");
+let DashboardActions = require('./datastores/dashboard-actions.js');
+let React = require("react");
+let UserMission = require("../missions-package/user-mission.js");
+let Kicksend = require("../../third_party/javascript-khansrc/mailcheck/mailcheck.js");
 ```
 
 Object destructuring should go after all require lines.
@@ -895,6 +911,19 @@ Use `// TODO:` to annotate solutions to problems.
   }
 ```
 
+Prefix you comments with `NOTE` when pointing out some unique characteristic about the snippet
+
+```js
+
+  return Object.assign({}, state, {
+    lists: Object.assign({}, state.lists, {
+      // NOTE:  This is a badass line of elegant code right here
+      [action.listArgs[0]]: productList(state.lists[action.listArgs[0]] || {}, action)
+    })
+  })
+
+```
+
 **[⬆ back to top](#table-of-contents)**
 
 
@@ -942,9 +971,9 @@ class ExerciseList extends Base {
    * @param {string=} id the database ID of the exercise
    */
   _showExercise(id) {
-    ...
+    // ...
   }
-  ...
+  // ...
 }
 ```
 
@@ -953,7 +982,7 @@ class ExerciseList extends Base {
 
 ### Console logs
 
-Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in production deployment.
+Only use `console.log(...)` during active development. If you feel they're important enough to keep in the file for future testing/debugging, please comment them out prior to pushing to git. **NEVER** deploy console logs in a production environment.
 
   > Why? A few reasons.  
     1. This causes memory leaks in the client (particularly in ReactNative).
@@ -1017,16 +1046,16 @@ console.log(b); // ReferenceError
 If you must use `var` create new statement for each declaration.
 Yes:
 ```js
-var a = "foo";
-var b = a + "bar";
-var c = fn(a, b);
+  var a = "foo";
+  var b = a + "bar";
+  var c = fn(a, b);
 ```
 
 No:
 ```js
-var a = "foo",
-b = a + "bar",
-c = fn(a, b);
+  var a = "foo",
+  b = a + "bar",
+  c = fn(a, b);
 ```
 
 A single var statement is bad because:
@@ -1145,7 +1174,7 @@ Conditional statements such as the `if` statement evaluate their expression usin
   + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
 
 ```javascript
-  if ([0] && []) {
+  if([0] && []) {
     // true
     // an array (even an empty one) is an object, objects will evaluate to true
   }
@@ -1155,32 +1184,32 @@ Use shortcuts for booleans, but explicit comparisons for strings and numbers.
 
 ```javascript
   // bad
-  if (isValid === true) {
+  if(isValid === true) {
     // ...
   }
 
   // good
-  if (isValid) {
+  if(isValid) {
     // ...
   }
 
   // bad
-  if (name) {
+  if(name) {
     // ...
   }
 
   // good
-  if (name !== '') {
+  if(name !== '') {
     // ...
   }
 
   // bad
-  if (collection.length) {
+  if(collection.length) {
     // ...
   }
 
   // good
-  if (collection.length > 0) {
+  if(collection.length > 0) {
     // ...
   }
 ```
@@ -1195,7 +1224,7 @@ Use braces to create blocks in `case` and `default` clauses that contain lexical
 
 ```javascript
   // bad
-  switch (foo) {
+  switch(foo) {
     case 1:
       let x = 1;
       break;
@@ -1212,7 +1241,7 @@ Use braces to create blocks in `case` and `default` clauses that contain lexical
   }
 
   // good
-  switch (foo) {
+  switch(foo) {
     case 1: {
       let x = 1;
       break;
