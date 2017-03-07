@@ -20,7 +20,8 @@
   * [Ordering](#ordering)
   * [References](#references)
   * [Conditionals in `render`](#conditionals-in-render)
-
+  * [Ternary Conditionals in `return`](#ternary-conditionals-in-return)
+  * [Styles](#styles)
 
 ----
 
@@ -812,5 +813,39 @@ Conditionals in `return` must be ternary syntax. Follow the following convention
     }
 
   ```
+
+## Styles
+  - Prefer CSS/SASS for most all styles
+  > Why? Stylesheets are easier to manage component styles with large applications..
+
+  - Use `classNames` for conditional styles
+  ```jsx
+    // very bad
+    render () {
+      var btnClass = 'btn';
+      if (this.state.isPressed) {
+        btnClass += ' btn-pressed';
+      } else if (this.state.isHovered) {
+        btnClass += ' btn-over';
+      }
+      return (
+        <button className={btnClass}>{this.props.label}</button>;
+      )
+    }
+
+    // good
+    render() {
+      var btnClass = classNames('btn', this.props.className, {
+        'btn-pressed': this.state.isPressed
+        , 'btn-over': !this.state.isPressed && this.state.isHovered
+      });
+      return (
+        <button className={btnClass}>{this.props.label}</button>;
+      )
+    }
+
+  ```
+
+
 
 **[⬆ back to top](#table-of-contents)**
