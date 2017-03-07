@@ -668,7 +668,7 @@ This guide is adapted from the Khan Academy and AirBnb style guides.
 
   ```
 
-  - Complex conditionals are fine to live in `if()`
+  - Complex conditionals are fine to live in an `if()`
   ```jsx
     // acceptable use case
     render() {
@@ -715,20 +715,102 @@ This guide is adapted from the Khan Academy and AirBnb style guides.
     }
   ```
 
-  - Conditionals in `return` must be ternary syntax. Follow the following convention for spacing.
+
+## Ternary Conditionals in `return`
+
+Conditionals in `return` must be ternary syntax. Follow the following convention for spacing and indentation.
+
+  - Place one space after the leading brace
 
   ```jsx
-    { isEmpty ?
-      (productList && productList.isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
-      :
-      <div style={{ opacity: productList.isFetching ? 0.5 : 1 }}>
-        <ul>
-          {productList.items.map((id, i) =>
-            <ProductListItem key={id} product={productMap[id]} />
-          )}
-        </ul>
-      </div>
+    // bad
+    {thingToTest ?
+      // ...
     }
+
+    // good
+    { thingToTest ?
+      // ...
+    }
+  ```
+
+  - Put conditional statements on one line
+
+  ```jsx
+    // bad
+    { !isThing
+      || isThing.length < 1
+      ?
+       // ...
+    }
+
+    // good
+    { !isThing || isThing.length < 1 ?
+      // ...
+    }
+  ```
+
+  - Indent starting blocks two spaces from the braces
+
+  ```jsx
+    // bad
+    { isThing ?
+          <div>
+          <p>NO</p>
+          </div>
+      :
+    null
+
+    }
+
+    // good
+    { isThing ?
+      <div>
+        <p>YES</p>
+      </div>
+      :
+      null
+    }
+  ```
+
+  - Place `else` colon (":") on its own line
+  ```jsx
+    // bad
+    { isThing ?
+      <div>NO</div>
+      : <div>something else</div>
+    }
+
+    // good
+    { isThing ?
+      <div>YES</div>
+      :
+      <div>Something else</div>
+    }
+  ```
+
+  - Don't leave unnecessary whitespace before, after, or inside the blocks
+
+  ```jsx
+    // bad
+    { isThing ?
+
+
+        <div>NO</div>
+
+        :
+        <div>other thing</div>
+
+
+    }
+
+    // good
+    { isThing ?
+      <div>NO</div>
+      :
+      <div>other thing</div>
+    }
+
   ```
 
 **[⬆ back to top](#table-of-contents)**
