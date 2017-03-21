@@ -4,9 +4,9 @@
 
 ## Table of Contents
 
-1. [Naming](#naming)
-1. [Nesting](#nesting)
-1. [Inline](#inline)
+  * [Naming](#naming)
+  * [Nesting](#nesting)
+  * [Inline](#inline)
 
 
 ----
