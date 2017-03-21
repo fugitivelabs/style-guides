@@ -18,5 +18,5 @@ While you are free to use your text editor of choice, we ask that you adhere to 
 
 - [JavaScript](/style/javascript.md)
 - [React](/style/react.md)
-- [CSS](/style/css.md)
+- [CSS](/style/css-sass.md)
 - [SASS](/style/sass.md)
